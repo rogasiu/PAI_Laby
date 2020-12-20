@@ -1,2 +1,2 @@
 # PAI_Laby
-#author Weronika Nowak
+#autor: Weronika Nowak
