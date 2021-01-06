@@ -1,9 +1,8 @@
 package com.example.stm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 
 @Table(name = "users")
 public class User {
@@ -36,9 +35,12 @@ public class User {
     private LocalDateTime registrationDateTime = LocalDateTime.now();
 
     //uzytkownik moze miec wiele zadan
+
     @OneToMany(
-            mappedBy = "author"
+            mappedBy = "author",
+            cascade = CascadeType.ALL // zawsze po stronie rodzica!
     )
+    @JsonIgnoreProperties({"author"})
     private List<Task> tasks = new ArrayList<>();
 
     public User(String name, String lastName, String email, String password, boolean status) {
@@ -48,5 +50,6 @@ public class User {
         this.password = password;
         this.status = status;
     }
+
 
 }

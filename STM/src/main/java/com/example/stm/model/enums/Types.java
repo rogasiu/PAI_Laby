@@ -13,4 +13,7 @@ public enum Types {
     Types(String typeName) {
         this.typeName = typeName;
     }
+    String getTypes(){
+        return typeName;
+    }
 }
