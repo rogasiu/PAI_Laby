@@ -2,6 +2,7 @@ package com.example.stm.model;
 
 import com.example.stm.model.enums.Status;
 import com.example.stm.model.enums.Types;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 
 @Table(name = "tasks")
 public class Task {
@@ -31,22 +32,22 @@ public class Task {
     private LocalDateTime dateAdded = LocalDateTime.now();
 
     @Enumerated(value = EnumType.STRING)
-    private Types type;
+    private Types types;
 
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
     //kazde zadanie posiada jednego autora
     @ManyToOne(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
+            fetch = FetchType.EAGER
     )
+    @JsonIgnoreProperties({"tasks"})
     private User author;
 
-    public Task(String title, String description, Types type, Status status, User author) {
+    public Task(String title, String description, Types types, Status status, User author) {
         this.title = title;
         this.description = description;
-        this.type = type;
+        this.types = types;
         this.status = status;
         this.author = author;
     }
