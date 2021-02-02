@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
-
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -27,6 +25,7 @@ public class Task {
 
     @Type(type = "text")
     private String description;
+
 
     @Column(name = "date_added")
     private LocalDateTime dateAdded = LocalDateTime.now();
